@@ -30,10 +30,6 @@ export class DogServiceImpl implements DogService {
   }
 
   update (id: number, dog: Dog) : Dog {
-    const _dog = this.get(id);
-    if (!_dog) {
-      throw new Error('Dog not found!');
-    }
     dog.id = id;
     return this.dogRepository.update(id, dog);
   }

@@ -40,7 +40,11 @@ export class DogRepositoryMemory implements DogRepository {
       }
       return _dog;
     });
-    return dog;
+    const updated = this.dogs.find(_dog => _dog.id == id);
+    if (!updated) {
+      throw new Error('Dog not found!');
+    }
+    return updated;
   }
 
 }
