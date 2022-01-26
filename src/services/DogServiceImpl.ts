@@ -1,8 +1,10 @@
+import { Body, Delete, Get, Path, Post, Put, Route } from 'tsoa';
 import { DogRepository } from '../interfaces/DogRepository';
 import { DogService } from '../interfaces/DogService';
 import { Dog } from '../models/Dog';
 
 
+@Route('/dogs')
 export class DogServiceImpl implements DogService {
 
   dogRepository: DogRepository;
@@ -11,25 +13,30 @@ export class DogServiceImpl implements DogService {
     this.dogRepository = dogRepository;
   }
 
+  @Get('/')
   list(): Dog[] {
     return this.dogRepository.list().sort((a, b) => {
       return a.id < b.id ? -1 : 1;
     });
   }
 
-  get(id: number) : Dog | undefined {
+  @Get('/{id}')
+  get(@Path() id: number): Dog | null {
     return this.dogRepository.get(id);
   }
 
-  add (dog: Dog) : Dog {
+  @Post('/')
+  add(@Body() dog: Dog): Dog {
     return this.dogRepository.add(dog);
   }
 
-  delete (id: number) : boolean {
+  @Delete('/{id}')
+  delete(@Path() id: number): boolean {
     return this.dogRepository.delete(id);
   }
 
-  update (id: number, dog: Dog) : Dog {
+  @Put('/{id}')
+  update(@Path() id: number, @Body() dog: Dog): Dog {
     dog.id = id;
     return this.dogRepository.update(id, dog);
   }

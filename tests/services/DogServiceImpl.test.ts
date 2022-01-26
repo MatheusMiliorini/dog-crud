@@ -21,18 +21,18 @@ describe('Testing all DogService methods', () => {
 
   test('Add two dogs and check list size', () => {
     dogService.add(Object.assign({}, testDog));
-    const newDog: Dog = dogService.add(Object.assign({}, testDog));
+    const newDog = dogService.add(Object.assign({}, testDog));
 
     expect(newDog.id).toBe(2);
     expect(dogService.list().length).toBe(2);
 
-    const dogAtPosition: Dog | undefined = dogService.get(2);
+    const dogAtPosition = dogService.get(2);
     expect(dogAtPosition).not.toBeUndefined();
     expect(dogAtPosition).toStrictEqual(newDog);
   });
 
   test('Check list is ordered', () => {
-    const dogs: Dog[] = dogService.list();
+    const dogs = dogService.list();
     expect(dogs[0].id).toBeLessThan(dogs[1].id);
   });
 
@@ -43,7 +43,7 @@ describe('Testing all DogService methods', () => {
   });
 
   test('New dog after delete should be 3', () => {
-    const newDog: Dog = dogService.add(Object.assign({}, testDog));
+    const newDog = dogService.add(Object.assign({}, testDog));
     expect(newDog.id).toBe(3);
   });
 
@@ -51,7 +51,7 @@ describe('Testing all DogService methods', () => {
     const toUpdate = {
       id: 99, name: 'Jeremias', age: 14
     };
-    const updatedDog: Dog = dogService.update(2, Object.assign({}, toUpdate));
+    const updatedDog = dogService.update(2, Object.assign({}, toUpdate));
     expect(updatedDog.id).not.toEqual(toUpdate.id);
     expect(updatedDog.id).toEqual(2);
     expect(updatedDog.name).toBe(toUpdate.name);

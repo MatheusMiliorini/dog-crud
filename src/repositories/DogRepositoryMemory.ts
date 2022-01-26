@@ -15,8 +15,8 @@ export class DogRepositoryMemory implements DogRepository {
     return this.dogs;
   }
 
-  get(id: number): Dog | undefined {
-    return this.dogs.find(dog => dog.id == id);
+  get(id: number): Dog | null {
+    return this.dogs.find(dog => dog.id == id) || null;
   }
 
   add(dog: Dog): Dog {

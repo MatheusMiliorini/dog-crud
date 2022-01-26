@@ -5,7 +5,7 @@ export interface DogService {
 
   list: () => Dog[];
 
-  get: (id: number) => Dog | undefined;
+  get: (id: number) => Dog | null;
 
   add: (dog: Dog) => Dog;
 
