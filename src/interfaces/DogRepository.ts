@@ -1,15 +1,16 @@
 
-import { Dog } from '../models/Dog';
+import { DogModel } from '../entities/DogModel';
+import { DogParam } from '../entities/DogParam';
 
 export interface DogRepository {
 
-  list: () => Dog[];
+  list: () => Promise<DogModel[]>;
 
-  get: (id: number) => Dog | null;
+  get: (id: string) => Promise<DogModel | null>;
 
-  add: (dog: Dog) => Dog;
+  add: (dog: DogParam) => Promise<DogModel>;
 
-  delete: (id: number) => boolean;
+  delete: (id: string) => Promise<boolean>;
 
-  update: (id: number, dog: Dog) => Dog
+  update: (id: string, dog: DogParam) => Promise<DogModel>;
 }

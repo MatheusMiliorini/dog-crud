@@ -1,50 +1,50 @@
-import { DogRepository } from '../interfaces/DogRepository';
-import { Dog } from '../models/Dog';
+// import { DogRepository } from '../interfaces/DogRepository';
+// import { DogModel } from '../entities/DogModel';
 
-export class DogRepositoryMemory implements DogRepository {
+// export class DogRepositoryMemory implements DogRepository {
 
-  dogs: Dog[];
-  lastId: number;
+//   dogs: DogModel[];
+//   lastId: number;
 
-  constructor() {
-    this.dogs = [];
-    this.lastId = 1;
-  }
+//   constructor() {
+//     this.dogs = [];
+//     this.lastId = 1;
+//   }
 
-  list(): Dog[] {
-    return this.dogs;
-  }
+//   list(): DogModel[] {
+//     return this.dogs;
+//   }
 
-  get(id: number): Dog | null {
-    return this.dogs.find(dog => dog.id == id) || null;
-  }
+//   get(id: string): DogModel | null {
+//     return this.dogs.find(dog => dog.id == id) || null;
+//   }
 
-  add(dog: Dog): Dog {
-    dog.id = this.lastId++;
-    this.dogs.push(dog);
-    return dog;
-  }
+//   add(dog: DogModel): DogModel {
+//     dog.id = (this.lastId++).toString();
+//     this.dogs.push(dog);
+//     return dog;
+//   }
 
-  delete(id: number): boolean {
-    const sizeBefore = this.dogs.length;
+//   delete(id: string): boolean {
+//     const sizeBefore = this.dogs.length;
 
-    this.dogs = this.dogs.filter(dog => dog.id != id);
+//     this.dogs = this.dogs.filter(dog => dog.id != id);
 
-    return this.dogs.length < sizeBefore;
-  }
+//     return this.dogs.length < sizeBefore;
+//   }
 
-  update(id: number, dog: Dog): Dog {
-    this.dogs = this.dogs.map(_dog => {
-      if (_dog.id == id) {
-        _dog = dog;
-      }
-      return _dog;
-    });
-    const updated = this.dogs.find(_dog => _dog.id == id);
-    if (!updated) {
-      throw new Error('Dog not found!');
-    }
-    return updated;
-  }
+//   update(id: string, dog: DogModel): DogModel {
+//     this.dogs = this.dogs.map(_dog => {
+//       if (_dog.id == id) {
+//         _dog = dog;
+//       }
+//       return _dog;
+//     });
+//     const updated = this.dogs.find(_dog => _dog.id == id);
+//     if (!updated) {
+//       throw new Error('DogModel not found!');
+//     }
+//     return updated;
+//   }
 
-}
+// }

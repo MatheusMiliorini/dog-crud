@@ -6,12 +6,29 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"Dog": {
+			"DogModel": {
 				"properties": {
-					"id": {
+					"name": {
+						"type": "string"
+					},
+					"age": {
 						"type": "number",
 						"format": "double"
 					},
+					"id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"age",
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DogParam": {
+				"properties": {
 					"name": {
 						"type": "string"
 					},
@@ -21,7 +38,6 @@
 					}
 				},
 				"required": [
-					"id",
 					"name",
 					"age"
 				],
@@ -54,7 +70,7 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/Dog"
+										"$ref": "#/components/schemas/DogModel"
 									},
 									"type": "array"
 								}
@@ -73,7 +89,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Dog"
+									"$ref": "#/components/schemas/DogModel"
 								}
 							}
 						}
@@ -86,7 +102,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Dog"
+								"$ref": "#/components/schemas/DogParam"
 							}
 						}
 					}
@@ -104,7 +120,7 @@
 								"schema": {
 									"allOf": [
 										{
-											"$ref": "#/components/schemas/Dog"
+											"$ref": "#/components/schemas/DogModel"
 										}
 									],
 									"nullable": true
@@ -120,8 +136,7 @@
 						"name": "id",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					}
 				]
@@ -147,8 +162,7 @@
 						"name": "id",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					}
 				]
@@ -161,7 +175,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/Dog"
+									"$ref": "#/components/schemas/DogModel"
 								}
 							}
 						}
@@ -174,8 +188,7 @@
 						"name": "id",
 						"required": true,
 						"schema": {
-							"format": "double",
-							"type": "number"
+							"type": "string"
 						}
 					}
 				],
@@ -184,7 +197,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/Dog"
+								"$ref": "#/components/schemas/DogParam"
 							}
 						}
 					}

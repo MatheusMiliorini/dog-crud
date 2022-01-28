@@ -1,7 +1,8 @@
 import { Body, Delete, Get, Path, Post, Put, Route } from 'tsoa';
 import { DogRepository } from '../interfaces/DogRepository';
 import { DogService } from '../interfaces/DogService';
-import { Dog } from '../models/Dog';
+import { DogModel } from '../entities/DogModel';
+import { DogParam } from '../entities/DogParam';
 
 
 @Route('/dogs')
@@ -14,30 +15,29 @@ export class DogServiceImpl implements DogService {
   }
 
   @Get('/')
-  list(): Dog[] {
-    return this.dogRepository.list().sort((a, b) => {
+  async list(): Promise<DogModel[]> {
+    return (await this.dogRepository.list()).sort((a, b) => {
       return a.id < b.id ? -1 : 1;
     });
   }
 
   @Get('/{id}')
-  get(@Path() id: number): Dog | null {
-    return this.dogRepository.get(id);
+  async get(@Path() id: string): Promise<DogModel | null> {
+    return await this.dogRepository.get(id);
   }
 
   @Post('/')
-  add(@Body() dog: Dog): Dog {
+  add(@Body() dog: DogParam): Promise<DogModel> {
     return this.dogRepository.add(dog);
   }
 
   @Delete('/{id}')
-  delete(@Path() id: number): boolean {
+  delete(@Path() id: string): Promise<boolean> {
     return this.dogRepository.delete(id);
   }
 
   @Put('/{id}')
-  update(@Path() id: number, @Body() dog: Dog): Dog {
-    dog.id = id;
+  update(@Path() id: string, @Body() dog: DogParam): Promise<DogModel> {
     return this.dogRepository.update(id, dog);
   }
 
