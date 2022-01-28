@@ -1,50 +1,51 @@
-// import { DogRepository } from '../interfaces/DogRepository';
-// import { DogModel } from '../entities/DogModel';
+import { DogRepository } from '../interfaces/DogRepository';
+import { DogModel } from '../entities/DogModel';
+import { DogParam } from '../entities/DogParam';
 
-// export class DogRepositoryMemory implements DogRepository {
+export class DogRepositoryMemory implements DogRepository {
 
-//   dogs: DogModel[];
-//   lastId: number;
+  dogs: DogModel[];
+  lastId: number;
 
-//   constructor() {
-//     this.dogs = [];
-//     this.lastId = 1;
-//   }
+  constructor() {
+    this.dogs = [];
+    this.lastId = 1;
+  }
 
-//   list(): DogModel[] {
-//     return this.dogs;
-//   }
+  list(): Promise<DogModel[]> {
+    return Promise.resolve(this.dogs);
+  }
 
-//   get(id: string): DogModel | null {
-//     return this.dogs.find(dog => dog.id == id) || null;
-//   }
+  get(id: string): Promise<DogModel | null> {
+    return Promise.resolve(this.dogs.find(dog => dog.id == id) || null);
+  }
 
-//   add(dog: DogModel): DogModel {
-//     dog.id = (this.lastId++).toString();
-//     this.dogs.push(dog);
-//     return dog;
-//   }
+  add(dog: DogParam): Promise<DogModel> {
+    const newDog: DogModel = { ...dog, id: (this.lastId++).toString() };
+    this.dogs.push(newDog);
+    return Promise.resolve(newDog);
+  }
 
-//   delete(id: string): boolean {
-//     const sizeBefore = this.dogs.length;
+  delete(id: string): Promise<boolean> {
+    const sizeBefore = this.dogs.length;
 
-//     this.dogs = this.dogs.filter(dog => dog.id != id);
+    this.dogs = this.dogs.filter(dog => dog.id != id);
 
-//     return this.dogs.length < sizeBefore;
-//   }
+    return Promise.resolve(this.dogs.length < sizeBefore);
+  }
 
-//   update(id: string, dog: DogModel): DogModel {
-//     this.dogs = this.dogs.map(_dog => {
-//       if (_dog.id == id) {
-//         _dog = dog;
-//       }
-//       return _dog;
-//     });
-//     const updated = this.dogs.find(_dog => _dog.id == id);
-//     if (!updated) {
-//       throw new Error('DogModel not found!');
-//     }
-//     return updated;
-//   }
+  update(id: string, dog: DogParam): Promise<DogModel> {
+    this.dogs = this.dogs.map(_dog => {
+      if (_dog.id == id) {
+        _dog = { ...dog, id };
+      }
+      return _dog;
+    });
+    const updated = this.dogs.find(_dog => _dog.id == id);
+    if (!updated) {
+      throw new Error('Dog not found!');
+    }
+    return Promise.resolve(updated);
+  }
 
-// }
+}

@@ -1,8 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
 
-import './firebase';
-
 import dogRoute from './routes/DogRoute';
 import swaggerUi from 'swagger-ui-express';
 

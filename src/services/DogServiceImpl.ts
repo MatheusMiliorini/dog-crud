@@ -17,7 +17,7 @@ export class DogServiceImpl implements DogService {
   @Get('/')
   async list(): Promise<DogModel[]> {
     return (await this.dogRepository.list()).sort((a, b) => {
-      return a.id < b.id ? -1 : 1;
+      return a.name < b.name ? -1 : (a.name == b.name ? 0 : 1);
     });
   }
 

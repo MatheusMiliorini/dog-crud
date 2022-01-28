@@ -18,7 +18,7 @@ export default class DogRepositoryFirestore implements DogRepository {
   async get(id: string): Promise<DogModel | null> {
     const doc = await db.collection(this.COLLECTION_NAME).doc(id).get();
     if (doc.exists) {
-      return doc.data() as DogModel;
+      return { ...doc.data(), id: doc.id } as DogModel;
     }
     return null;
   }

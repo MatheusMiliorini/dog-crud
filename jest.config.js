@@ -2,5 +2,8 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testPathIgnorePatterns: ['build']
+  testPathIgnorePatterns: ['build'],
+  moduleNameMapper: {
+    'firebase-admin/(.*)': '<rootDir>/node_modules/firebase-admin/lib/$1'
+  }
 };
