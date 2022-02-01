@@ -2,7 +2,9 @@ import { DogRepository } from '../interfaces/DogRepository';
 import { DogModel } from '../entities/DogModel';
 import { db } from '../firebase';
 import { DogParam } from '../entities/DogParam';
+import { injectable } from 'inversify';
 
+@injectable()
 export default class DogRepositoryFirestore implements DogRepository {
 
   private COLLECTION_NAME = 'dogs';

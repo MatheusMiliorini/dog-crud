@@ -1,7 +1,9 @@
 import { DogRepository } from '../interfaces/DogRepository';
 import { DogModel } from '../entities/DogModel';
 import { DogParam } from '../entities/DogParam';
+import { injectable } from 'inversify';
 
+@injectable()
 export class DogRepositoryMemory implements DogRepository {
 
   dogs: DogModel[];

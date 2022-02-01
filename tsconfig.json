@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ES6",
+    "lib": ["ES6"],
+    "types": ["reflect-metadata", "jest"],
     "module": "commonjs",
     "rootDir": "./",
     "outDir": "./build",

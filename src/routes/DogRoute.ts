@@ -1,17 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Router } from 'express';
-import { DogRepository } from '../interfaces/DogRepository';
 import { DogService } from '../interfaces/DogService';
 import { DogModel } from '../entities/DogModel';
-import { DogServiceImpl } from '../services/DogServiceImpl';
 import { Request } from 'express';
-import DogRepositoryFirestore from '../repositories/DogRepositoryFirestore';
 import { DogParam } from '../entities/DogParam';
+import { container } from '../inversify.config';
+import { TYPES } from '../types';
 
 const router = Router();
 
-const dogRepository: DogRepository = new DogRepositoryFirestore();
-const dogService: DogService = new DogServiceImpl(dogRepository);
+const dogService = container.get<DogService>(TYPES.DogService);
 
 router.get('/', async (req, res) => {
   res.json(await dogService.list());

@@ -1,3 +1,7 @@
+import 'reflect-metadata';
+import { Container } from 'inversify';
+import { TYPES } from '../../src/types';
+
 import { DogParam } from '../../src/entities/DogParam';
 import { DogRepository } from '../../src/interfaces/DogRepository';
 import { DogService } from '../../src/interfaces/DogService';
@@ -6,8 +10,15 @@ import { DogServiceImpl } from '../../src/services/DogServiceImpl';
 
 describe('Testing all DogService methods', () => {
 
-  const dogRepository: DogRepository = new DogRepositoryMemory();
-  const dogService: DogService = new DogServiceImpl(dogRepository);
+  let dogService: DogService;
+
+  beforeAll(() => {
+    const container = new Container();
+    container.bind<DogRepository>(TYPES.DogRepository).to(DogRepositoryMemory);
+    container.bind<DogService>(TYPES.DogService).to(DogServiceImpl);
+
+    dogService = container.get<DogService>(TYPES.DogService);
+  });
 
   const testDog: DogParam = {
     name: 'Luna',

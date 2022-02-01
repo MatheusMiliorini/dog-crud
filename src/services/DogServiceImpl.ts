@@ -3,14 +3,17 @@ import { DogRepository } from '../interfaces/DogRepository';
 import { DogService } from '../interfaces/DogService';
 import { DogModel } from '../entities/DogModel';
 import { DogParam } from '../entities/DogParam';
+import { inject, injectable } from 'inversify';
+import { TYPES } from '../types';
 
 
+@injectable()
 @Route('/dogs')
 export class DogServiceImpl implements DogService {
 
   dogRepository: DogRepository;
 
-  constructor(dogRepository: DogRepository) {
+  constructor(@inject(TYPES.DogRepository) dogRepository: DogRepository) {
     this.dogRepository = dogRepository;
   }
 
